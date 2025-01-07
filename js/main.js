@@ -38,7 +38,6 @@ let posX = maxX / 2;
 let maxY = map.offsetHeight - playerSize;
 let posY = maxY / 2;
 let stepSize = 50;
-updatePos(posX, posY);
 // Move object to clicked coordinates on screen
 let isMouseClicking = false;
 map.addEventListener("mousemove", (e) => {
@@ -100,3 +99,4 @@ function updateBorder() {
   maxX = map.offsetWidth - playerSize;
   maxY = map.offsetHeight - playerSize;
 }
+updatePos(posX, posY);
