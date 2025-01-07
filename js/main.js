@@ -26,17 +26,19 @@ applySettingsBtn.addEventListener("click", (e) => {
   console.log("yippie");
   changePlayerSize(playerSizeInput.value);
   changeStepSize(stepSizeInput.value);
+  updateBorder();
   settingsDialog.close();
 });
 // Player options
 let playerSize = 100;
 changePlayerSize(playerSize);
 // Positioning variables
-const maxX = map.offsetWidth - playerSize;
+let maxX = map.offsetWidth - playerSize;
 let posX = maxX / 2;
-const maxY = map.offsetHeight - playerSize;
+let maxY = map.offsetHeight - playerSize;
 let posY = maxY / 2;
 let stepSize = 50;
+updatePos(posX, posY);
 // Move object to clicked coordinates on screen
 map.addEventListener("click", (e) => {
   updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
@@ -83,4 +85,8 @@ function updatePos(x, y) {
   if (posY < 0) posY = 0;
   if (posY > maxY) posY = maxY;
   player.style.transform = `translate(${posX}px, ${posY}px)`;
+}
+function updateBorder() {
+  maxX = map.offsetWidth - playerSize;
+  maxY = map.offsetHeight - playerSize;
 }
