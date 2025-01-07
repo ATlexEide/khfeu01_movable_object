@@ -70,9 +70,6 @@ function move(key) {
     case "ArrowLeft":
       posX -= stepSize;
       break;
-
-    default:
-      break;
   }
   console.log(`X: ${posX}, Y: ${posY}`);
   updatePos(posX, posY);
