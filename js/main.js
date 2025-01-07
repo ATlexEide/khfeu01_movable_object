@@ -33,7 +33,9 @@ let playerSize = 100;
 changePlayerSize(playerSize);
 // Positioning variables
 let posX = 0;
+const maxX = map.offsetWidth - playerSize;
 let posY = 0;
+const maxY = map.offsetHeight - playerSize;
 let stepSize = 50;
 // Move object to clicked coordinates on screen
 map.addEventListener("click", (e) => {
@@ -80,7 +82,15 @@ function move(key) {
 }
 function moveTo(x, y) {
   posX = x - playerSize / 2;
+  if (posX < 0) posX = 0;
+  if (posX > maxX) posX = maxX;
+
   posY = y - playerSize / 2;
+  if (posY < 0) posY = 0;
+  if (posY > maxY) posY = maxY;
+
   console.log(`X: ${posX}, Y: ${posY}`);
+  console.log("max X: ", maxX);
+  console.log("max Y: ", maxY);
   player.style.transform = `translate(${posX}px, ${posY}px)`;
 }
