@@ -1,8 +1,11 @@
-const settings = document.getElementById("settings");
+const settingsBtn = document.getElementById("settings");
+const settingsDialog = document.getElementById("settings-dialog");
+const applySettingsBtn = document.getElementById("cancel-btn");
+const cancelSettingsBtn = document.getElementById("apply-btn");
 const map = document.getElementById("map");
 const player = document.getElementById("player");
 // Settings
-settings.addEventListener("click", () => {
+settingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
 });
 // Player options
