@@ -2,6 +2,8 @@ const settingsBtn = document.getElementById("settings");
 const settingsDialog = document.getElementById("settings-dialog");
 const applySettingsBtn = document.getElementById("cancel-btn");
 const cancelSettingsBtn = document.getElementById("apply-btn");
+
+//
 const map = document.getElementById("map");
 const player = document.getElementById("player");
 // Settings
@@ -15,7 +17,7 @@ cancelSettingsBtn.addEventListener("click", () => {
 });
 // Apply settings
 applySettingsBtn.addEventListener("click", () => {
-  settingsDialog.close();
+  player.style.width = settingsDialog.close();
 });
 // Player options
 let playerSize = 100;
