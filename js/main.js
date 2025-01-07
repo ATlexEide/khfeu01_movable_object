@@ -37,10 +37,7 @@ let posY = 0;
 let stepSize = 50;
 // Move object to clicked coordinates on screen
 map.addEventListener("click", (e) => {
-  posX = e.clientX - playerSize / 2;
-  posY = e.clientY - playerSize / 2;
-  console.log(`X: ${posX}, Y: ${posY}`);
-  player.style.transform = `translate(${posX}px, ${posY}px)`;
+  moveTo(e.clientX, e.clientY);
 });
 //
 document.addEventListener("keydown", (e) => {
@@ -78,6 +75,12 @@ function move(key) {
     default:
       break;
   }
+  console.log(`X: ${posX}, Y: ${posY}`);
+  player.style.transform = `translate(${posX}px, ${posY}px)`;
+}
+function moveTo(x, y) {
+  posX = x - playerSize / 2;
+  posY = y - playerSize / 2;
   console.log(`X: ${posX}, Y: ${posY}`);
   player.style.transform = `translate(${posX}px, ${posY}px)`;
 }
