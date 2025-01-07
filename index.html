@@ -6,10 +6,24 @@
     <title>Movable Object</title>
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/main.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/a8de8f4858.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
+    <header>
+      <span id="settings"
+        ><i class="fa fa-gear" style="font-size: 36px; color: white"></i
+      ></span>
+    </header>
     <main id="map">
       <div id="player"></div>
     </main>
+    <dialog id="settings-dialog" open>
+      <form>
+        <legend>Settings</legend>
+      </form>
+    </dialog>
   </body>
 </html>

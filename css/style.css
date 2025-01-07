@@ -10,6 +10,24 @@ body {
   width: 100vw;
   height: 100svh;
 }
+header {
+  height: fit-content;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 1em;
+  z-index: 1;
+  position: relative;
+}
+dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 50%;
+}
+#settings {
+}
 #map {
   height: 100%;
   width: 100%;
