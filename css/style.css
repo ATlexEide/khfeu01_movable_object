@@ -16,7 +16,8 @@ header {
   flex-direction: row-reverse;
   padding: 1em;
   z-index: 1;
-  position: relative;
+  position: absolute;
+  width: 100%;
 }
 dialog {
   position: absolute;
