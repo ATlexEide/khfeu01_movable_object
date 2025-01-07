@@ -85,9 +85,5 @@ function updatePos(x, y) {
   posY = y;
   if (posY < 0) posY = 0;
   if (posY > maxY) posY = maxY;
-
-  // console.log(`X: ${posX}, Y: ${posY}`);
-  // console.log("max X: ", maxX);
-  // console.log("max Y: ", maxY);
   player.style.transform = `translate(${posX}px, ${posY}px)`;
 }
