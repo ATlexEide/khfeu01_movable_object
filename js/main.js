@@ -32,14 +32,14 @@ applySettingsBtn.addEventListener("click", (e) => {
 let playerSize = 100;
 changePlayerSize(playerSize);
 // Positioning variables
-let posX = 0;
 const maxX = map.offsetWidth - playerSize;
-let posY = 0;
+let posX = maxX / 2;
 const maxY = map.offsetHeight - playerSize;
+let posY = maxY / 2;
 let stepSize = 50;
 // Move object to clicked coordinates on screen
 map.addEventListener("click", (e) => {
-  moveTo(e.clientX, e.clientY);
+  updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
 });
 //
 document.addEventListener("keydown", (e) => {
@@ -60,15 +60,12 @@ function move(key) {
   switch (key) {
     case "ArrowRight":
       posX += stepSize;
-      console.log(stepSize);
-      console.log(posX);
       break;
     case "ArrowUp":
       posY -= stepSize;
       break;
     case "ArrowDown":
       posY += stepSize;
-
       break;
     case "ArrowLeft":
       posX -= stepSize;
@@ -78,19 +75,19 @@ function move(key) {
       break;
   }
   console.log(`X: ${posX}, Y: ${posY}`);
-  player.style.transform = `translate(${posX}px, ${posY}px)`;
+  updatePos(posX, posY);
 }
-function moveTo(x, y) {
-  posX = x - playerSize / 2;
+function updatePos(x, y) {
+  posX = x;
   if (posX < 0) posX = 0;
   if (posX > maxX) posX = maxX;
 
-  posY = y - playerSize / 2;
+  posY = y;
   if (posY < 0) posY = 0;
   if (posY > maxY) posY = maxY;
 
-  console.log(`X: ${posX}, Y: ${posY}`);
-  console.log("max X: ", maxX);
-  console.log("max Y: ", maxY);
+  // console.log(`X: ${posX}, Y: ${posY}`);
+  // console.log("max X: ", maxX);
+  // console.log("max Y: ", maxY);
   player.style.transform = `translate(${posX}px, ${posY}px)`;
 }
