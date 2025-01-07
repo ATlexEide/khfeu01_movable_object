@@ -7,7 +7,7 @@ const stepSizeInput = document.getElementById("step-size");
 //
 const map = document.getElementById("map");
 const player = document.getElementById("player");
-// Settings
+//// Settings
 // Open settings dialog
 settingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
