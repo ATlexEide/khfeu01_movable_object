@@ -5,8 +5,17 @@ const cancelSettingsBtn = document.getElementById("apply-btn");
 const map = document.getElementById("map");
 const player = document.getElementById("player");
 // Settings
+// Open settings dialog
 settingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
+});
+// Cancel settings and close dialog
+cancelSettingsBtn.addEventListener("click", () => {
+  settingsDialog.close();
+});
+// Apply settings
+applySettingsBtn.addEventListener("click", () => {
+  settingsDialog.close();
 });
 // Player options
 let playerSize = 100;
