@@ -40,8 +40,18 @@ let posY = maxY / 2;
 let stepSize = 50;
 updatePos(posX, posY);
 // Move object to clicked coordinates on screen
-map.addEventListener("click", (e) => {
+let isMouseClicking = false;
+map.addEventListener("mousemove", (e) => {
+  if (isMouseClicking)
+    updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
+});
+map.addEventListener("mousedown", (e) => {
   updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
+  console.log(isMouseClicking);
+  isMouseClicking = true;
+});
+map.addEventListener("mouseup", () => {
+  isMouseClicking = false;
 });
 //
 document.addEventListener("keydown", (e) => {
