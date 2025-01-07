@@ -1,15 +1,17 @@
 const map = document.getElementById("map");
 const player = document.getElementById("player");
-
-// Move object to clicked coordinates on screen
-map.addEventListener("click", (e) => {
-  console.log(e.clientX, e.clientY);
-  player.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
-//
+// Positioning variables
 let posX = 0;
 let posY = 0;
 let step = 50;
+// Move object to clicked coordinates on screen
+map.addEventListener("click", (e) => {
+  console.log(e.clientX, e.clientY);
+  posX = e.clientX;
+  posY = e.clientY;
+  player.style.transform = `translate(${posX}px, ${posY}px)`;
+});
+//
 document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "ArrowUp":
