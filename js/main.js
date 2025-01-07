@@ -44,7 +44,21 @@ map.addEventListener("click", (e) => {
 });
 //
 document.addEventListener("keydown", (e) => {
-  switch (e.key) {
+  move(e.key);
+});
+
+function changePlayerSize(size) {
+  playerSize = size;
+  player.style.width = `${playerSize}px`;
+}
+function changeStepSize(size) {
+  console.log("new stepSize: ", size);
+  stepSize = Number(size);
+  console.log(stepSize);
+}
+
+function move(key) {
+  switch (key) {
     case "ArrowRight":
       posX += stepSize;
       console.log(stepSize);
@@ -66,14 +80,4 @@ document.addEventListener("keydown", (e) => {
   }
   console.log(`X: ${posX}, Y: ${posY}`);
   player.style.transform = `translate(${posX}px, ${posY}px)`;
-});
-
-function changePlayerSize(size) {
-  playerSize = size;
-  player.style.width = `${playerSize}px`;
-}
-function changeStepSize(size) {
-  console.log("new stepSize: ", size);
-  stepSize = Number(size);
-  console.log(stepSize);
 }
