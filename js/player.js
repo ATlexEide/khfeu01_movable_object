@@ -1,6 +1,7 @@
 export class Player {
   constructor(settings, map) {
-    (this.object = document.getElementById("player")),
+    (this.map = map),
+      (this.object = document.getElementById("player")),
       (this.playerSize = settings.playerSize),
       (this.stepSize = settings.stepSize),
       (this.position = {
@@ -8,21 +9,25 @@ export class Player {
         y: map.border.y / 2 - settings.playerSize,
       });
   }
-  updatePos(x, y, map) {
+  updatePos(x, y) {
     this.position.x = x;
     if (this.position.x < 0) this.position.x = 0;
-    if (this.position.x > map.border.x) this.position.x = map.border.x;
+    if (this.position.x > this.map.border.x)
+      this.position.x = this.map.border.x;
 
     this.position.y = y;
     if (this.position.y < 0) this.position.y = 0;
-    if (this.position.y > map.border.y) this.position.y = map.border.y;
+    if (this.position.y > this.map.border.y)
+      this.position.y = this.map.border.y;
     player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
   }
   resetPos() {
-    this.position.x = map.object.offsetWidth / 2 - this.playerSize;
-    this.position.y = map.object.offsetHeight / 2 - this.playerSize;
+    this.updatePos(
+      this.map.object.offsetWidth / 2 - this.playerSize,
+      this.map.object.offsetHeight / 2 - this.playerSize
+    );
   }
-  move(key, map) {
+  move(key) {
     switch (key) {
       case "ArrowRight":
         this.position.x += this.stepSize;
@@ -38,7 +43,7 @@ export class Player {
         break;
     }
     console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
-    this.updatePos(this.position.x, this.position.y, map);
+    this.updatePos(this.position.x, this.position.y);
   }
   // Move object to clicked coordinates on screen
 }
