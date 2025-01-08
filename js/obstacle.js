@@ -9,7 +9,7 @@ export class Obstacle {
     this.y = y;
     this.size = size;
   }
-  init = () => {
+  place = () => {
     const obstacle = document.createElement("div");
     obstacle.id = this.id;
     obstacle.classList.add("obstacle");
