@@ -1,6 +1,7 @@
 export class Player {
   constructor(settings, map) {
-    (this.object = document.getElementById("player")),
+    (this.map = map),
+      (this.object = document.getElementById("player")),
       (this.playerSize = settings.playerSize),
       (this.stepSize = settings.stepSize),
       (this.position = {
@@ -18,9 +19,12 @@ export class Player {
     if (this.position.y > map.border.y) this.position.y = map.border.y;
     player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
   }
-  resetPos() {
-    this.position.x = map.object.offsetWidth / 2 - this.playerSize;
-    this.position.y = map.object.offsetHeight / 2 - this.playerSize;
+  resetPos(map) {
+    this.updatePos(
+      map.object.offsetWidth / 2 - this.playerSize,
+      map.object.offsetHeight / 2 - this.playerSize,
+      map
+    );
   }
   move(key, map) {
     switch (key) {
