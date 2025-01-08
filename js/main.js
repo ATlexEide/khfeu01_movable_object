@@ -1,28 +1,11 @@
-const properties = {
-  player: {
-    object: document.getElementById("player"),
-    playerSize: 100,
-    stepSize: 50,
-    position: {
-      x: this.map.borderX / 2,
-      y: this.map.borderY / 2,
-    },
-  },
-  map: {
-    area: document.getElementById("map"),
-    borderX: this.map.area.offsetWidth - playerSize,
-    borderY: this.map.area.offsetHeight - playerSize,
-  },
-  settings: {},
-};
+import { Map } from "./map.js";
+import { Player } from "./player.js";
+import { Settings } from "./settings.js";
 // Settings dialog variables
-const settingsBtn = document.getElementById("settings");
-const settingsDialog = document.getElementById("settings-dialog");
-const applySettingsBtn = document.getElementById("apply-btn");
-const cancelSettingsBtn = document.getElementById("cancel-btn");
-const playerSizeInput = document.getElementById("player-size");
-const stepSizeInput = document.getElementById("step-size");
-
+const settings = new Settings(100, 50);
+const map = new Map(settings);
+const player = new Player(settings, map);
+console.log(settings);
 //// Settings
 // Open settings dialog
 settingsBtn.addEventListener("click", () => {
@@ -46,16 +29,22 @@ applySettingsBtn.addEventListener("click", (e) => {
   settingsDialog.close();
 });
 // Player options
-changePlayerSize(playerSize);
+changePlayerSize(properties.player.playerSize);
 
 // Move object to clicked coordinates on screen
 let isMouseClicking = false;
 map.addEventListener("mousemove", (e) => {
   if (isMouseClicking)
-    updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
+    updatePos(
+      e.clientX - properties.player.playerSize / 2,
+      e.clientY - properties.player.playerSize / 2
+    );
 });
 map.addEventListener("mousedown", (e) => {
-  updatePos(e.clientX - playerSize / 2, e.clientY - playerSize / 2);
+  updatePos(
+    e.clientX - properties.player.playerSize / 2,
+    e.clientY - properties.player.playerSize / 2
+  );
   console.log(isMouseClicking);
   isMouseClicking = true;
 });
@@ -68,45 +57,19 @@ document.addEventListener("keydown", (e) => {
 });
 
 function changePlayerSize(size) {
-  playerSize = size;
-  player.style.width = `${playerSize}px`;
+  properties.player.playerSize = size;
+  properties.player.object.style.width = `${properties.player.playerSize}px`;
 }
 function changeStepSize(size) {
   console.log("new stepSize: ", size);
-  stepSize = Number(size);
-  console.log(stepSize);
+  properties.player.stepSize = Number(size);
+  console.log(properties.player.stepSize);
 }
 
-function move(key) {
-  switch (key) {
-    case "ArrowRight":
-      posX += stepSize;
-      break;
-    case "ArrowUp":
-      posY -= stepSize;
-      break;
-    case "ArrowDown":
-      posY += stepSize;
-      break;
-    case "ArrowLeft":
-      posX -= stepSize;
-      break;
-  }
-  console.log(`X: ${posX}, Y: ${posY}`);
-  updatePos(posX, posY);
-}
-function updatePos(x, y) {
-  posX = x;
-  if (posX < 0) posX = 0;
-  if (posX > maxX) posX = maxX;
-
-  posY = y;
-  if (posY < 0) posY = 0;
-  if (posY > maxY) posY = maxY;
-  player.style.transform = `translate(${posX}px, ${posY}px)`;
-}
 function updateBorder() {
-  maxX = map.offsetWidth - playerSize;
-  maxY = map.offsetHeight - playerSize;
+  properties.map.border.x =
+    properties.map.object.offsetWidth - properties.player.playerSize;
+  properties.map.border.y =
+    properties.map.object.offsetHeight - properties.player.playerSize;
 }
-updatePos(posX, posY);
+properties.init();
