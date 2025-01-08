@@ -1,12 +1,28 @@
+const properties = {
+  player: {
+    object: document.getElementById("player"),
+    playerSize: 100,
+    stepSize: 50,
+    position: {
+      x: this.map.borderX / 2,
+      y: this.map.borderY / 2,
+    },
+  },
+  map: {
+    area: document.getElementById("map"),
+    borderX: this.map.area.offsetWidth - playerSize,
+    borderY: this.map.area.offsetHeight - playerSize,
+  },
+  settings: {},
+};
+// Settings dialog variables
 const settingsBtn = document.getElementById("settings");
 const settingsDialog = document.getElementById("settings-dialog");
 const applySettingsBtn = document.getElementById("apply-btn");
 const cancelSettingsBtn = document.getElementById("cancel-btn");
 const playerSizeInput = document.getElementById("player-size");
 const stepSizeInput = document.getElementById("step-size");
-//
-const map = document.getElementById("map");
-const player = document.getElementById("player");
+
 //// Settings
 // Open settings dialog
 settingsBtn.addEventListener("click", () => {
@@ -30,14 +46,8 @@ applySettingsBtn.addEventListener("click", (e) => {
   settingsDialog.close();
 });
 // Player options
-let playerSize = 100;
 changePlayerSize(playerSize);
-// Positioning variables
-let maxX = map.offsetWidth - playerSize;
-let posX = maxX / 2;
-let maxY = map.offsetHeight - playerSize;
-let posY = maxY / 2;
-let stepSize = 50;
+
 // Move object to clicked coordinates on screen
 let isMouseClicking = false;
 map.addEventListener("mousemove", (e) => {
