@@ -8,6 +8,7 @@ export class Player {
         x: map.border.x / 2 - settings.playerSize,
         y: map.border.y / 2 - settings.playerSize,
       });
+    this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
     this.position.x = x;
