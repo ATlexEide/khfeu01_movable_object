@@ -13,14 +13,18 @@ export class Map {
   }
   init = (settings, player) => {
     this.object.addEventListener("mousemove", (e) => {
-      if (this.isMouseClicking)
+      if (this.isMouseClicking) {
+        player.object.style.transition = "0s";
         player.updatePos(
           e.clientX - settings.playerSize / 2,
           e.clientY - settings.playerSize / 2,
           this
         );
+      }
     });
     this.object.addEventListener("mousedown", (e) => {
+      player.object.style.transition = "0.3s";
+
       player.updatePos(
         e.clientX - settings.playerSize / 2,
         e.clientY - settings.playerSize / 2,
@@ -34,6 +38,8 @@ export class Map {
     });
     //
     document.addEventListener("keydown", (e) => {
+      player.object.style.transition = "0.3s";
+
       player.move(e.key);
     });
   };
