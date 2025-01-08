@@ -34,7 +34,7 @@ export class Map {
     });
     //
     document.addEventListener("keydown", (e) => {
-      player.move(e.key, this);
+      player.move(e.key);
     });
   };
 }

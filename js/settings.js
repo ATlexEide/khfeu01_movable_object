@@ -35,7 +35,7 @@ export class Settings {
       map.updateBorder(this);
       this.settingsDialog.close();
     });
-    player.resetPos(map);
+    player.resetPos();
   };
   changePlayerSize(player, size) {
     this.playerSize = size;
