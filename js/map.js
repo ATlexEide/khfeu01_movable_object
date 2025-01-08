@@ -8,8 +8,8 @@ export class Map {
       });
   }
   updateBorder(settings) {
-    this.border.x = this.object.offsetWidth - settings.playerSize / 2;
-    this.border.y = this.object.offsetHeight - settings.playerSize / 2;
+    this.border.x = this.object.offsetWidth - settings.playerSize;
+    this.border.y = this.object.offsetHeight - settings.playerSize;
   }
   init = (settings, player) => {
     this.object.addEventListener("mousemove", (e) => {
