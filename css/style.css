@@ -62,3 +62,8 @@ dialog form {
   background-color: yellow;
   aspect-ratio: 1;
 }
+.obstacle {
+  background-color: red;
+  position: absolute;
+  aspect-ratio: 1;
+}
