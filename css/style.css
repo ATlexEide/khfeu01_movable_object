@@ -52,8 +52,6 @@ dialog form {
   gap: 2em;
   justify-content: center;
 }
-#settings dialog {
-}
 #map {
   height: 100%;
   width: 100%;
