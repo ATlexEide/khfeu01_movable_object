@@ -60,5 +60,6 @@ dialog form {
 #player {
   position: absolute;
   background-color: yellow;
+  width: 100px;
   aspect-ratio: 1;
 }
