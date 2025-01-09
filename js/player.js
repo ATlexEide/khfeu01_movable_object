@@ -7,6 +7,7 @@ export class Player {
     this.position = {
       x: map.border.x / 2,
       y: map.border.y / 2,
+      previous: { x: map.border.x / 2, y: map.border.y / 2 },
     };
     this.origin = document.getElementById("origin");
     this.middle = {
@@ -16,6 +17,8 @@ export class Player {
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
+    this.position.previous.x = this.position.x;
+    this.position.previous.y = this.position.y;
     this.position.x = x;
     this.position.y = y;
     this.middle.x = x + this.playerSize / 2;
@@ -34,20 +37,18 @@ export class Player {
   move(key) {
     switch (key) {
       case "ArrowRight":
-        this.position.x += this.stepSize;
+        this.updatePos(this.position.x + this.stepSize, this.position.y);
         break;
       case "ArrowUp":
-        this.position.y -= this.stepSize;
+        this.updatePos(this.position.x, this.position.y - this.stepSize);
         break;
       case "ArrowDown":
-        this.position.y += this.stepSize;
+        this.updatePos(this.position.x, this.position.y + this.stepSize);
         break;
       case "ArrowLeft":
-        this.position.x -= this.stepSize;
+        this.updatePos(this.position.x - this.stepSize, this.position.y);
         break;
     }
-    // console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
-    this.updatePos(this.position.x, this.position.y);
   }
   borderCollisionCheck(x, y) {
     if (this.position.x < 0) {
@@ -72,7 +73,6 @@ export class Player {
         "y",
         this.position.y + this.playerSize / 2
       );
-      console.log("x", this.middle.x, "y", this.middle.y);
 
       if (
         this.middle.x + this.playerSize / 2 > obstacle.x[0] &&
@@ -105,7 +105,8 @@ export class Player {
       // console.log(obstacle);
       if (this.phasing(obstacle)) {
         console.log("phasing");
-        return;
+        console.log(this.position.x, this.position.previous.x);
+        this.updatePos(this.position.previous.x, this.position.previous.y);
       }
     });
   }
