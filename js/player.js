@@ -20,8 +20,8 @@ export class Player {
     this.position.y = y;
     this.middle.x = x + this.playerSize / 2;
     this.middle.y = y + this.playerSize / 2;
-    this.borderCollisionCheck();
-    this.obstacleCollisionCheck();
+    this.borderCollisionCheck(x, y);
+    this.obstacleCollisionCheck(x, y);
     player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
     this.origin.style.transform = `translate(${this.middle.x}px, ${this.middle.y}px)`;
   }
@@ -49,7 +49,7 @@ export class Player {
     // console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
     this.updatePos(this.position.x, this.position.y);
   }
-  borderCollisionCheck() {
+  borderCollisionCheck(x, y) {
     if (this.position.x < 0) {
       this.position.x = 0;
     }
@@ -102,7 +102,31 @@ export class Player {
           this.middle.y = obstacle.y[1] + this.playerSize / 2;
         }
       }
+      // console.log(obstacle);
+      if (this.phasing(obstacle)) {
+        console.log("phasing");
+        return;
+      }
     });
   }
-  // Move object to clicked coordinates on screen
+
+  phasing(obstacle) {
+    // console.log(obstacle);
+    const right = this.middle.x + this.playerSize / 2;
+    const left = this.middle.x - this.playerSize / 2;
+    const top = this.middle.y - this.playerSize / 2;
+    const bottom = this.middle.y + this.playerSize / 2;
+    const obstacleLeft = obstacle.x[0];
+    const obstacleRight = obstacle.x[1];
+    const obstacleTop = obstacle.y[0];
+    const obstacleBottom = obstacle.y[1];
+    if (
+      right > obstacleLeft &&
+      left < obstacleRight &&
+      bottom > obstacleTop &&
+      top < obstacleBottom
+    ) {
+      return true;
+    }
+  }
 }
