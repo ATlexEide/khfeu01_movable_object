@@ -2,11 +2,11 @@ import { Obstacle } from "./obstacle.js";
 export class Map {
   isMouseClicking = false;
   constructor(settings) {
-    (this.object = document.getElementById("map")),
-      (this.border = {
-        x: document.getElementById("map").offsetWidth - settings.playerSize,
-        y: document.getElementById("map").offsetHeight - settings.playerSize,
-      });
+    this.object = document.getElementById("map");
+    this.border = {
+      x: document.getElementById("map").offsetWidth - settings.playerSize,
+      y: document.getElementById("map").offsetHeight - settings.playerSize,
+    };
     this.obstacles = Obstacle.usedSpace;
   }
   updateBorder(settings) {
