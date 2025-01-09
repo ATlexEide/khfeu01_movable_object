@@ -1,3 +1,4 @@
+import { Obstacle } from "./obstacle.js";
 export class Map {
   isMouseClicking = false;
   constructor(settings) {
@@ -6,6 +7,7 @@ export class Map {
         x: document.getElementById("map").offsetWidth - settings.playerSize,
         y: document.getElementById("map").offsetHeight - settings.playerSize,
       });
+    this.obstacles = Obstacle.usedSpace;
   }
   updateBorder(settings) {
     this.border.x = this.object.offsetWidth - settings.playerSize;
