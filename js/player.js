@@ -16,48 +16,14 @@ export class Player {
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
-    // Check for obstacle colission
-
-    // Check for border colission
     this.position.x = x;
-    if (this.position.x < 0) {
-      this.position.x = 0;
-    }
-    if (this.position.x > this.map.border.x) {
-      this.position.x = this.map.border.x;
-    }
-
     this.position.y = y;
-    if (this.position.y < 0) this.position.y = 0;
-    if (this.position.y > this.map.border.y)
-      this.position.y = this.map.border.y;
-    this.middle.x = this.position.x + this.playerSize / 2;
-    this.middle.y = this.position.y + this.playerSize / 2;
+    this.middle.x = x + this.playerSize / 2;
+    this.middle.y = y + this.playerSize / 2;
+    this.borderCollisionCheck();
+    this.obstacleCollisionCheck();
     player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
     this.origin.style.transform = `translate(${this.middle.x}px, ${this.middle.y}px)`;
-
-    this.map.obstacles.forEach((obstacle) => {
-      console.clear();
-      console.log("x", obstacle.x);
-      console.log("y ", obstacle.y);
-      console.log(
-        "x",
-        this.position.x + this.playerSize / 2,
-        "y",
-        this.position.y + this.playerSize / 2
-      );
-      console.log("x", this.middle.x, "y", this.middle.y);
-
-      if (
-        this.middle.x > obstacle.x[0] &&
-        this.middle.x < obstacle.x[1] &&
-        this.middle.y > obstacle.y[0] &&
-        this.middle.y < obstacle.y[1]
-      ) {
-        console.log("contact");
-        this.resetPos();
-      }
-    });
   }
   resetPos() {
     this.updatePos(
@@ -82,6 +48,42 @@ export class Player {
     }
     // console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
     this.updatePos(this.position.x, this.position.y);
+  }
+  borderCollisionCheck() {
+    if (this.position.x < 0) {
+      this.position.x = 0;
+    }
+    if (this.position.x > this.map.border.x) {
+      this.position.x = this.map.border.x;
+    }
+
+    if (this.position.y < 0) this.position.y = 0;
+    if (this.position.y > this.map.border.y)
+      this.position.y = this.map.border.y;
+  }
+  obstacleCollisionCheck() {
+    this.map.obstacles.forEach((obstacle) => {
+      console.clear();
+      console.log("x", obstacle.x);
+      console.log("y ", obstacle.y);
+      console.log(
+        "x",
+        this.position.x + this.playerSize / 2,
+        "y",
+        this.position.y + this.playerSize / 2
+      );
+      console.log("x", this.middle.x, "y", this.middle.y);
+
+      if (
+        this.middle.x > obstacle.x[0] &&
+        this.middle.x < obstacle.x[1] &&
+        this.middle.y > obstacle.y[0] &&
+        this.middle.y < obstacle.y[1]
+      ) {
+        console.log("contact");
+        this.resetPos();
+      }
+    });
   }
   // Move object to clicked coordinates on screen
 }
