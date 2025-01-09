@@ -5,14 +5,37 @@ export class Player {
     this.playerSize = settings.playerSize;
     this.stepSize = settings.stepSize;
     this.position = {
-      x: map.border.x / 2 - settings.playerSize,
-      y: map.border.y / 2 - settings.playerSize,
+      x: map.border.x / 2,
+      y: map.border.y / 2,
     };
-    this.origin = { x: this.position.x, y: this.position.y };
+    this.origin = document.getElementById("origin");
+    this.middle = {
+      x: this.position.x + this.playerSize / 2,
+      y: this.position.y + this.playerSize / 2,
+    };
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
     // Check for obstacle colission
+
+    // Check for border colission
+    this.position.x = x;
+    if (this.position.x < 0) {
+      this.position.x = 0;
+    }
+    if (this.position.x > this.map.border.x) {
+      this.position.x = this.map.border.x;
+    }
+
+    this.position.y = y;
+    if (this.position.y < 0) this.position.y = 0;
+    if (this.position.y > this.map.border.y)
+      this.position.y = this.map.border.y;
+    this.middle.x = this.position.x + this.playerSize / 2;
+    this.middle.y = this.position.y + this.playerSize / 2;
+    player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
+    this.origin.style.transform = `translate(${this.middle.x}px, ${this.middle.y}px)`;
+
     this.map.obstacles.forEach((obstacle) => {
       console.clear();
       console.log("x", obstacle.x);
@@ -23,25 +46,18 @@ export class Player {
         "y",
         this.position.y + this.playerSize / 2
       );
-      if (
-        x + this.playerSize > obstacle.x[0] &&
-        x + this.playerSize < obstacle.x[1] &&
-        y > obstacle.y[0] &&
-        y < obstacle.y[1]
-      )
-        console.log("contact");
-    });
-    // Check for border colission
-    this.position.x = x;
-    if (this.position.x < 0) this.position.x = 0;
-    if (this.position.x > this.map.border.x)
-      this.position.x = this.map.border.x;
+      console.log("x", this.middle.x, "y", this.middle.y);
 
-    this.position.y = y;
-    if (this.position.y < 0) this.position.y = 0;
-    if (this.position.y > this.map.border.y)
-      this.position.y = this.map.border.y;
-    player.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
+      if (
+        this.middle.x > obstacle.x[0] &&
+        this.middle.x < obstacle.x[1] &&
+        this.middle.y > obstacle.y[0] &&
+        this.middle.y < obstacle.y[1]
+      ) {
+        console.log("contact");
+        this.resetPos();
+      }
+    });
   }
   resetPos() {
     this.updatePos(
