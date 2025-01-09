@@ -75,13 +75,32 @@ export class Player {
       console.log("x", this.middle.x, "y", this.middle.y);
 
       if (
-        this.middle.x > obstacle.x[0] &&
-        this.middle.x < obstacle.x[1] &&
-        this.middle.y > obstacle.y[0] &&
-        this.middle.y < obstacle.y[1]
+        this.middle.x + this.playerSize / 2 > obstacle.x[0] &&
+        this.middle.x - this.playerSize / 2 < obstacle.x[1] &&
+        this.middle.y + this.playerSize / 2 > obstacle.y[0] &&
+        this.middle.y - this.playerSize / 2 < obstacle.y[1]
       ) {
         console.log("contact");
-        this.resetPos();
+        if (this.middle.x < obstacle.x[0]) {
+          console.log("left hit");
+          this.position.x = obstacle.x[0] - this.playerSize;
+          this.middle.x = obstacle.x[0] - this.playerSize / 2;
+        }
+        if (this.middle.x > obstacle.x[1]) {
+          console.log("right hit");
+          this.position.x = obstacle.x[1];
+          this.middle.x = obstacle.x[1] + this.playerSize / 2;
+        }
+        if (this.middle.y < obstacle.y[0]) {
+          console.log("top hit");
+          this.position.y = obstacle.y[0] - this.playerSize;
+          this.middle.y = obstacle.y[0] - this.playerSize / 2;
+        }
+        if (this.middle.y > obstacle.y[1]) {
+          console.log("bottom hit");
+          this.position.y = obstacle.y[1];
+          this.middle.y = obstacle.y[1] + this.playerSize / 2;
+        }
       }
     });
   }
