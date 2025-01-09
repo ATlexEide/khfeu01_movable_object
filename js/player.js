@@ -11,6 +11,26 @@ export class Player {
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
+    // Check for obstacle colission
+    this.map.obstacles.forEach((obstacle) => {
+      console.clear();
+      console.log("x", obstacle.x);
+      console.log("y ", obstacle.y);
+      console.log(
+        "x",
+        this.position.x + this.playerSize / 2,
+        "y",
+        this.position.y + this.playerSize / 2
+      );
+      if (
+        // x + this.playerSize > obstacle.x[0] &&
+        // x + this.playerSize < obstacle.x[1]
+        y > obstacle.y[0] &&
+        y < obstacle.y[1]
+      )
+        console.log("contact");
+    });
+    // Check for border colission
     this.position.x = x;
     if (this.position.x < 0) this.position.x = 0;
     if (this.position.x > this.map.border.x)
@@ -43,7 +63,7 @@ export class Player {
         this.position.x -= this.stepSize;
         break;
     }
-    console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
+    // console.log(`X: ${this.position.x}, Y: ${this.position.y}`);
     this.updatePos(this.position.x, this.position.y);
   }
   // Move object to clicked coordinates on screen

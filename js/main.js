@@ -7,6 +7,8 @@ export const map = new Map(settings);
 const player = new Player(settings, map);
 settings.init(map, player);
 map.init(settings, player);
-new Obstacle(200, 200, 100).init();
-new Obstacle(600, 200).init();
-new Obstacle(420, 451, 300).init();
+// Place an obstacle (x axis, y axis, optional size in px)
+
+// new Obstacle(420, 451, 300).place();
+new Obstacle(1020, 51, 130).place();
+// new Obstacle(1020, 511, 130).place();
