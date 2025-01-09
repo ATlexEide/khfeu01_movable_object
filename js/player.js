@@ -11,6 +11,7 @@ export class Player {
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
+    // Check for border colission
     this.position.x = x;
     if (this.position.x < 0) this.position.x = 0;
     if (this.position.x > this.map.border.x)
