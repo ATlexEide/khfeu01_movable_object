@@ -1,13 +1,14 @@
 export class Player {
   constructor(settings, map) {
-    (this.map = map),
-      (this.object = document.getElementById("player")),
-      (this.playerSize = settings.playerSize),
-      (this.stepSize = settings.stepSize),
-      (this.position = {
-        x: map.border.x / 2 - settings.playerSize,
-        y: map.border.y / 2 - settings.playerSize,
-      });
+    this.map = map;
+    this.object = document.getElementById("player");
+    this.playerSize = settings.playerSize;
+    this.stepSize = settings.stepSize;
+    this.position = {
+      x: map.border.x / 2 - settings.playerSize,
+      y: map.border.y / 2 - settings.playerSize,
+    };
+    this.origin = { x: this.position.x, y: this.position.y };
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y) {
@@ -23,8 +24,8 @@ export class Player {
         this.position.y + this.playerSize / 2
       );
       if (
-        // x + this.playerSize > obstacle.x[0] &&
-        // x + this.playerSize < obstacle.x[1]
+        x + this.playerSize > obstacle.x[0] &&
+        x + this.playerSize < obstacle.x[1] &&
         y > obstacle.y[0] &&
         y < obstacle.y[1]
       )
