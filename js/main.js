@@ -9,6 +9,6 @@ settings.init(map, player);
 map.init(settings, player);
 // Place an obstacle (x axis, y axis, optional size in px)
 
-new Obstacle(420, 451, 300).place();
-// new Obstacle(1020, 51, 130).place();
+// new Obstacle(420, 451, 300).place();
+new Obstacle(1020, 51, 130).place();
 // new Obstacle(1020, 511, 130).place();
