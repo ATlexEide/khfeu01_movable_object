@@ -11,6 +11,7 @@ export class Obstacle {
     this.y = y;
     this.maxY = y + size;
     this.size = size;
+    this.place();
   }
   place = () => {
     console.log("X: ", this.x, this.maxX);
