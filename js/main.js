@@ -12,4 +12,4 @@ map.init(settings, player);
 new Obstacle(420, 451, 300);
 new Obstacle(720, 481, 130);
 new Obstacle(1020, 511, 130);
-new Obstacle(0, 0, 200);
+new Obstacle(0, 500, 200);
