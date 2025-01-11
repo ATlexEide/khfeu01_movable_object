@@ -1,6 +1,6 @@
 :root {
   background-color: rgb(76, 76, 76);
-  background-image: url(./assets/images/grass.webp);
+  background-image: url(../assets/images/grass.webp);
   background-size: 6em;
 }
 * {
@@ -63,7 +63,7 @@ dialog form {
   position: absolute;
   background-color: yellow;
   aspect-ratio: 1;
-  background-image: url(./assets/images/steve.jpg);
+  background-image: url(../assets/images/steve.jpg);
   background-size: cover;
 }
 #origin {
@@ -77,6 +77,6 @@ dialog form {
   background-color: black;
   position: absolute;
   aspect-ratio: 1;
-  background-image: url(./assets/images/barrier.png);
+  background-image: url(../assets/images/barrier.png);
   background-size: cover;
 }
