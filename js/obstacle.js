@@ -14,16 +14,12 @@ export class Obstacle {
     this.place();
   }
   place = () => {
-    console.log("X: ", this.x, this.maxX);
-    console.log("Y : ", this.y, this.maxY);
     Obstacle.usedSpace.push({ x: [this.x, this.maxX], y: [this.y, this.maxY] });
-    console.log(Obstacle.usedSpace);
     const obstacle = document.createElement("div");
     obstacle.id = this.id;
     obstacle.classList.add("obstacle");
     obstacle.style.width = `${this.size}px`;
     obstacle.style.transform = `translate(${this.x}px, ${this.y}px)`;
     this.map.object.appendChild(obstacle);
-    console.log(this);
   };
 }
