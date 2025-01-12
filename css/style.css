@@ -14,13 +14,12 @@ body {
   height: 100svh;
 }
 header {
-  height: fit-content;
   display: flex;
   flex-direction: row-reverse;
-  padding: 1em;
-  z-index: 1;
   position: absolute;
-  width: 100%;
+  right: 0;
+  margin: 1em;
+  z-index: 1;
 }
 dialog {
   position: absolute;
