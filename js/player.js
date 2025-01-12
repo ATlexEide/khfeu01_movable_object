@@ -75,7 +75,7 @@ export class Player {
     if (this.position.y > this.map.border.y)
       this.position.y = this.map.border.y;
   }
-
+  // TODO: Fix collission with overlapping coords
   obstacleCollisionCheck() {
     this.map.obstacles.forEach((obstacle) => {
       if (
