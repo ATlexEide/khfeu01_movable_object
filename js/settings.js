@@ -34,12 +34,12 @@ export class Settings {
     player.resetPos();
   };
   changePlayerSize(player, size) {
-    this.playerSize = size;
-    player.playerSize = size;
+    this.playerSize = Number(size);
+    player.playerSize = Number(size);
     player.object.style.width = `${player.playerSize}px`;
   }
   changeStepSize(player, size) {
-    player.stepSize = size;
-    this.stepSize = size;
+    player.stepSize = Number(size);
+    this.stepSize = Number(size);
   }
 }
