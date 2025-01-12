@@ -21,15 +21,11 @@ export class Settings {
     // Cancel settings and close dialog
     this.cancelSettingsBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log("yippie");
       this.settingsDialog.close();
     });
     // Apply settings
     this.applySettingsBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log("player size: ", this.playerSizeInput.value);
-      console.log("step size: ", this.stepSizeInput.value);
-      console.log("yippie");
       this.changePlayerSize(player, this.playerSizeInput.value);
       this.changeStepSize(player, this.stepSizeInput.value);
       map.updateBorder(this);
@@ -43,8 +39,7 @@ export class Settings {
     player.object.style.width = `${player.playerSize}px`;
   }
   changeStepSize(player, size) {
-    console.log("new stepSize: ", size);
-    player.stepSize = Number(size);
-    console.log(player.stepSize);
+    player.stepSize = size;
+    this.stepSize = size;
   }
 }
