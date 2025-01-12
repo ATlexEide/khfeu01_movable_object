@@ -32,7 +32,6 @@ export class Map {
         e.clientY - settings.playerSize / 2,
         this
       );
-      console.log(this.isMouseClicking);
       this.isMouseClicking = true;
     });
     this.object.addEventListener("mouseup", () => {

@@ -1,13 +1,14 @@
 export class Player {
   constructor(settings, map) {
     this.map = map;
+    this.settings = settings;
     this.object = document.getElementById("player");
     this.playerSize = settings.playerSize;
     this.stepSize = settings.stepSize;
     this.position = {
-      x: map.border.x / 2,
-      y: map.border.y / 2,
-      previous: { x: map.border.x / 2, y: map.border.y / 2 },
+      x: this.map.border.x / 2,
+      y: this.map.border.y / 2,
+      previous: { x: this.map.border.x / 2, y: this.map.border.y / 2 },
     };
     this.origin = document.getElementById("origin");
     this.middle = {
@@ -37,16 +38,28 @@ export class Player {
   move(key) {
     switch (key) {
       case "ArrowRight":
-        this.updatePos(this.position.x + this.stepSize, this.position.y);
+        this.updatePos(
+          this.position.x + this.settings.stepSize,
+          this.position.y
+        );
         break;
       case "ArrowUp":
-        this.updatePos(this.position.x, this.position.y - this.stepSize);
+        this.updatePos(
+          this.position.x,
+          this.position.y - this.settings.stepSize
+        );
         break;
       case "ArrowDown":
-        this.updatePos(this.position.x, this.position.y + this.stepSize);
+        this.updatePos(
+          this.position.x,
+          this.position.y + this.settings.stepSize
+        );
         break;
       case "ArrowLeft":
-        this.updatePos(this.position.x - this.stepSize, this.position.y);
+        this.updatePos(
+          this.position.x - this.settings.stepSize,
+          this.position.y
+        );
         break;
     }
   }
@@ -62,18 +75,9 @@ export class Player {
     if (this.position.y > this.map.border.y)
       this.position.y = this.map.border.y;
   }
+  // TODO: Fix collission with overlapping coords
   obstacleCollisionCheck() {
     this.map.obstacles.forEach((obstacle) => {
-      console.clear();
-      console.log("x", obstacle.x);
-      console.log("y ", obstacle.y);
-      console.log(
-        "x",
-        this.position.x + this.playerSize / 2,
-        "y",
-        this.position.y + this.playerSize / 2
-      );
-
       if (
         this.middle.x + this.playerSize / 2 > obstacle.x[0] &&
         this.middle.x - this.playerSize / 2 < obstacle.x[1] &&
@@ -102,17 +106,13 @@ export class Player {
           this.middle.y = obstacle.y[1] + this.playerSize / 2;
         }
       }
-      // console.log(obstacle);
       if (this.phasing(obstacle)) {
-        console.log("phasing");
-        console.log(this.position.x, this.position.previous.x);
         this.updatePos(this.position.previous.x, this.position.previous.y);
       }
     });
   }
 
   phasing(obstacle) {
-    // console.log(obstacle);
     const right = this.middle.x + this.playerSize / 2;
     const left = this.middle.x - this.playerSize / 2;
     const top = this.middle.y - this.playerSize / 2;
