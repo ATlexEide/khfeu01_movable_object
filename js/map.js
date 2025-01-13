@@ -17,6 +17,7 @@ export class Map {
     this.object.addEventListener("mousemove", (e) => {
       if (this.isMouseClicking) {
         player.object.style.transition = "0s";
+        // player.origin.style.transition = "10s";
         player.updatePos(
           e.clientX - settings.playerSize / 2,
           e.clientY - settings.playerSize / 2,
