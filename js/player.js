@@ -87,6 +87,7 @@ export class Player {
       const x = this.position.x;
       const xx = this.position.x + this.playerSize;
       // TODO: Fix when player is bigger than obstacle
+      // Check coordinate overlapping with player and obstacle
       const right = obstacle.x[0] < x && x < obstacle.x[1];
       const left = obstacle.x[0] < xx && xx < obstacle.x[1];
       const bottom = obstacle.y[0] < y && y < obstacle.y[1];
