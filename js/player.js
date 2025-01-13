@@ -79,19 +79,26 @@ export class Player {
     if (this.position.y > this.map.border.y)
       this.position.y = this.map.border.y;
   }
-  // TODO: Fix collission with overlapping coords
   obstacleCollisionCheck(side) {
     this.map.obstacles.forEach((obstacle) => {
+      // Player coordinates
       const y = this.position.y;
       const yy = this.position.y + this.playerSize;
       const x = this.position.x;
       const xx = this.position.x + this.playerSize;
-      // TODO: Fix when player is bigger than obstacle
+      // Check coordinate overlapping with player and obstacle
       const right = obstacle.x[0] < x && x < obstacle.x[1];
       const left = obstacle.x[0] < xx && xx < obstacle.x[1];
       const bottom = obstacle.y[0] < y && y < obstacle.y[1];
       const top = obstacle.y[0] < yy && yy < obstacle.y[1];
+      const bigX = x <= obstacle.x[0] && xx > obstacle.x[1];
+      const bigY = y <= obstacle.y[0] && yy > obstacle.y[1];
+
       if (
+        (bigX && top) ||
+        (bigX && bottom) ||
+        (bigY && left) ||
+        (bigY && right) ||
         (top && left) ||
         (top && right) ||
         (bottom && left) ||
@@ -118,6 +125,10 @@ export class Player {
           default:
             break;
         }
+      if (this.phasing(obstacle)) {
+        this.position.x = this.position.previous.x;
+        this.position.y = this.position.previous.y;
+      }
     });
   }
 
