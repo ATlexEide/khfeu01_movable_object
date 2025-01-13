@@ -71,7 +71,6 @@ dialog form {
   width: 3px;
   aspect-ratio: 1;
   background-color: blue;
-  transition: 0.3s;
 }
 .obstacle {
   background-color: black;
