@@ -125,6 +125,10 @@ export class Player {
           default:
             break;
         }
+      if (this.phasing(obstacle)) {
+        this.position.x = this.position.previous.x;
+        this.position.y = this.position.previous.y;
+      }
     });
   }
 
