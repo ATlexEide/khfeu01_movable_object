@@ -81,6 +81,7 @@ export class Player {
   }
   obstacleCollisionCheck(side) {
     this.map.obstacles.forEach((obstacle) => {
+      // Player coordinates
       const y = this.position.y;
       const yy = this.position.y + this.playerSize;
       const x = this.position.x;
