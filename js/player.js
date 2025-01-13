@@ -78,37 +78,21 @@ export class Player {
   // TODO: Fix collission with overlapping coords
   obstacleCollisionCheck() {
     this.map.obstacles.forEach((obstacle) => {
+      const y = this.position.y;
+      const yy = this.position.y + this.playerSize;
+      const x = this.position.x;
+      const xx = this.position.x + this.playerSize;
+      const right = obstacle.x[0] < x && x < obstacle.x[1];
+      const left = obstacle.x[0] < xx && xx < obstacle.x[1];
+      const bottom = obstacle.y[0] < y && y < obstacle.y[1];
+      const top = obstacle.y[0] < yy && yy < obstacle.y[1];
       if (
-        this.middle.x + this.playerSize / 2 > obstacle.x[0] &&
-        this.middle.x - this.playerSize / 2 < obstacle.x[1] &&
-        this.middle.y + this.playerSize / 2 > obstacle.y[0] &&
-        this.middle.y - this.playerSize / 2 < obstacle.y[1]
-      ) {
-        console.log("contact");
-        if (this.middle.x < obstacle.x[0]) {
-          console.log("left hit");
-          this.position.x = obstacle.x[0] - this.playerSize;
-          this.middle.x = obstacle.x[0] - this.playerSize / 2;
-        }
-        if (this.middle.x > obstacle.x[1]) {
-          console.log("right hit");
-          this.position.x = obstacle.x[1];
-          this.middle.x = obstacle.x[1] + this.playerSize / 2;
-        }
-        if (this.middle.y < obstacle.y[0]) {
-          console.log("top hit");
-          this.position.y = obstacle.y[0] - this.playerSize;
-          this.middle.y = obstacle.y[0] - this.playerSize / 2;
-        }
-        if (this.middle.y > obstacle.y[1]) {
-          console.log("bottom hit");
-          this.position.y = obstacle.y[1];
-          this.middle.y = obstacle.y[1] + this.playerSize / 2;
-        }
-      }
-      if (this.phasing(obstacle)) {
-        this.updatePos(this.position.previous.x, this.position.previous.y);
-      }
+        (top && left) ||
+        (top && right) ||
+        (bottom && left) ||
+        (bottom && right)
+      )
+        console.log("yippie");
     });
   }
 
@@ -128,6 +112,6 @@ export class Player {
       top < obstacleBottom
     ) {
       return true;
-    }
+    } else return false;
   }
 }
