@@ -2,7 +2,7 @@ import { Map } from "./map.js";
 import { Player } from "./player.js";
 import { Settings } from "./settings.js";
 import { Obstacle } from "./obstacle.js";
-const settings = new Settings(200, 50);
+const settings = new Settings(100, 50);
 export const map = new Map(settings);
 const player = new Player(settings, map);
 settings.init(map, player);
