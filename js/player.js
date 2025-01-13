@@ -37,6 +37,7 @@ export class Player {
   }
   move(key) {
     switch (key) {
+      case "d":
       case "ArrowRight":
         this.updatePos(
           this.position.x + this.settings.stepSize,
@@ -44,6 +45,7 @@ export class Player {
           "left"
         );
         break;
+      case "w":
       case "ArrowUp":
         this.updatePos(
           this.position.x,
@@ -51,6 +53,7 @@ export class Player {
           "bottom"
         );
         break;
+      case "s":
       case "ArrowDown":
         this.updatePos(
           this.position.x,
@@ -58,6 +61,7 @@ export class Player {
           "top"
         );
         break;
+      case "a":
       case "ArrowLeft":
         this.updatePos(
           this.position.x - this.settings.stepSize,
