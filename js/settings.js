@@ -1,3 +1,4 @@
+import { Obstacle } from "./obstacle.js";
 export class Settings {
   // Buttons
   settingsBtn = document.getElementById("settings");
@@ -8,6 +9,9 @@ export class Settings {
   stepSizeInput = document.getElementById("step-size");
   // Dialog
   settingsDialog = document.getElementById("settings-dialog");
+  addObstacleBtn = document.getElementById("add-obstacle-btn");
+  obstacleSizeInput = document.getElementById("add-obstacle-size");
+  static previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
@@ -31,6 +35,13 @@ export class Settings {
       map.updateBorder(this);
       this.settingsDialog.close();
     });
+    this.addObstacleBtn.addEventListener("click", (e) => {
+      this.previewActive = true;
+      console.log("Enabled preview");
+      e.preventDefault();
+      this.previewObstacle(map, this.obstacleSizeInput.value);
+      this.settingsDialog.close();
+    });
     player.resetPos();
   };
   changePlayerSize(player, size) {
@@ -41,5 +52,35 @@ export class Settings {
   changeStepSize(player, size) {
     player.stepSize = Number(size);
     this.stepSize = Number(size);
+  }
+  previewObstacle(map, size = 50) {
+    const preview = document.createElement("div");
+    preview.id = "obstacle-preview";
+    preview.style.width = `${size}px`;
+    map.object.appendChild(preview);
+    let x;
+    let y;
+    map.object.addEventListener("mousemove", (e) => {
+      if (this.previewActive) {
+        x = e.clientX - size / 2;
+        y = e.clientY - size / 2;
+        preview.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    });
+    if (this.previewActive) {
+      map.object.addEventListener(
+        "click",
+        () => {
+          this.previewActive = false;
+          console.log("Disabled preview");
+          map.object.removeChild(preview);
+          this.addObstacle(x, y, size);
+        },
+        { once: true }
+      );
+    }
+  }
+  addObstacle(x, y, size) {
+    new Obstacle(x, y, size);
   }
 }

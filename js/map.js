@@ -1,4 +1,5 @@
 import { Obstacle } from "./obstacle.js";
+import { Settings } from "./settings.js";
 export class Map {
   isMouseClicking = false;
   constructor(settings) {
@@ -15,6 +16,7 @@ export class Map {
   }
   init = (settings, player) => {
     this.object.addEventListener("mousemove", (e) => {
+      if (Settings.previewActive) return;
       if (this.isMouseClicking) {
         player.object.style.transition = "0s";
         // player.origin.style.transition = "10s";
@@ -26,6 +28,7 @@ export class Map {
       }
     });
     this.object.addEventListener("mousedown", (e) => {
+      if (Settings.previewActive) return;
       player.object.style.transition = "0.3s";
 
       player.updatePos(
