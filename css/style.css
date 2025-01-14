@@ -56,21 +56,21 @@ dialog form {
 #map {
   height: 100%;
   width: 100%;
-  border: solid 1px blue;
+  border: solid 1px rgb(0, 0, 0);
 }
 #player {
-  border: solid 2px blue;
   position: absolute;
-  background-color: yellow;
   aspect-ratio: 1;
   background-image: url(../assets/images/steve.jpg);
   background-size: cover;
+  /* border: solid 2px blue; */
+  /* background-color: yellow; */
 }
 #origin {
   position: absolute;
   width: 3px;
   aspect-ratio: 1;
-  background-color: blue;
+  /* background-color: blue; */
 }
 .obstacle {
   background-color: black;
@@ -82,5 +82,7 @@ dialog form {
 #obstacle-preview {
   aspect-ratio: 1;
   position: absolute;
-  background-color: black;
+  background-image: url(../assets/images/barrier.png);
+  background-size: cover;
+  opacity: 0.7;
 }
