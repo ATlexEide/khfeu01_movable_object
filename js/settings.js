@@ -1,4 +1,5 @@
 import { Obstacle } from "./obstacle.js";
+import { Player } from "./player.js";
 export class Settings {
   // Buttons
   settingsBtn = document.getElementById("settings");
@@ -75,12 +76,16 @@ export class Settings {
           console.log("Disabled preview");
           map.object.removeChild(preview);
           this.addObstacle(x, y, size);
+          player.updatePos(
+            player.position.previous.x,
+            player.position.previous.y
+          );
         },
         { once: true }
       );
     }
   }
   addObstacle(x, y, size) {
-    new Obstacle(x, y, size);
+    new Obstacle(x, y, Number(size));
   }
 }
