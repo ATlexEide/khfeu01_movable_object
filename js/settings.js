@@ -12,6 +12,7 @@ export class Settings {
   settingsDialog = document.getElementById("settings-dialog");
   addObstacleBtn = document.getElementById("add-obstacle-btn");
   obstacleSizeInput = document.getElementById("add-obstacle-size");
+  userNameInput = document.getElementById("change-skin");
   static previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
@@ -31,6 +32,10 @@ export class Settings {
     // Apply settings
     this.applySettingsBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      const userName = this.userNameInput.value
+        ? this.userNameInput.value
+        : "steve";
+      player.object.style.backgroundImage = `url(https://minotar.net/avatar/${userName})`;
       this.changePlayerSize(player, this.playerSizeInput.value);
       this.changeStepSize(player, this.stepSizeInput.value);
       map.updateBorder(this);
@@ -38,6 +43,7 @@ export class Settings {
     });
     this.addObstacleBtn.addEventListener("click", (e) => {
       Settings.previewActive = true;
+      0;
       e.preventDefault();
       this.previewObstacle(
         map,
