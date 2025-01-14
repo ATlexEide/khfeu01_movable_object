@@ -28,15 +28,17 @@ export class Map {
       }
     });
     this.object.addEventListener("mousedown", (e) => {
-      if (Settings.previewActive) return;
-      player.object.style.transition = "0.3s";
+      if (!Settings.previewActive) {
+        console.log(Settings.previewActive);
+        player.object.style.transition = "0.3s";
 
-      player.updatePos(
-        e.clientX - settings.playerSize / 2,
-        e.clientY - settings.playerSize / 2,
-        this
-      );
-      this.isMouseClicking = true;
+        player.updatePos(
+          e.clientX - settings.playerSize / 2,
+          e.clientY - settings.playerSize / 2,
+          this
+        );
+        this.isMouseClicking = true;
+      }
     });
     this.object.addEventListener("mouseup", () => {
       this.isMouseClicking = false;
