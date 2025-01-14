@@ -39,7 +39,10 @@ export class Settings {
     this.addObstacleBtn.addEventListener("click", (e) => {
       Settings.previewActive = true;
       e.preventDefault();
-      this.previewObstacle(map, this.obstacleSizeInput.value);
+      this.previewObstacle(
+        map,
+        this.obstacleSizeInput.value ? this.obstacleSizeInput.value : 50
+      );
       this.settingsDialog.close();
     });
     player.resetPos();
