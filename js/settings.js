@@ -43,9 +43,12 @@ export class Settings {
       this.settingsDialog.close();
     });
     this.addObstacleBtn.addEventListener("click", (e) => {
-      Settings.previewActive = true;
-      0;
       e.preventDefault();
+      if (this.obstacleSizeInput.value && this.obstacleSizeInput.value < 50) {
+        alert("Size must be 50 or more");
+        return;
+      }
+      Settings.previewActive = true;
       this.previewObstacle(
         map,
         this.obstacleSizeInput.value ? this.obstacleSizeInput.value : 50
