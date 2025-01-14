@@ -82,5 +82,7 @@ dialog form {
 #obstacle-preview {
   aspect-ratio: 1;
   position: absolute;
-  background-color: black;
+  background-image: url(../assets/images/barrier.png);
+  background-size: cover;
+  opacity: 0.7;
 }
