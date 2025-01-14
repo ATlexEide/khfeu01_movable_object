@@ -13,6 +13,7 @@ export class Settings {
   addObstacleBtn = document.getElementById("add-obstacle-btn");
   obstacleSizeInput = document.getElementById("add-obstacle-size");
   userNameInput = document.getElementById("change-skin");
+  defaultUserName = "steve";
   static previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
@@ -34,7 +35,7 @@ export class Settings {
       e.preventDefault();
       const userName = this.userNameInput.value
         ? this.userNameInput.value
-        : "steve";
+        : this.defaultUserName;
       player.object.style.backgroundImage = `url(https://minotar.net/avatar/${userName})`;
       this.changePlayerSize(player, this.playerSizeInput.value);
       this.changeStepSize(player, this.stepSizeInput.value);
