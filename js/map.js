@@ -29,7 +29,6 @@ export class Map {
     });
     this.object.addEventListener("mousedown", (e) => {
       if (!Settings.previewActive) {
-        console.log(Settings.previewActive);
         player.object.style.transition = "0.3s";
 
         player.updatePos(
