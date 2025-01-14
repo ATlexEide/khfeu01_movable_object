@@ -35,7 +35,7 @@ export class Settings {
     });
     this.addObstacleBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      this.addObstacle();
+      this.previewObstacle(this.obstacleSizeInput.value);
       this.settingsDialog.close();
     });
     player.resetPos();
@@ -49,7 +49,6 @@ export class Settings {
     player.stepSize = Number(size);
     this.stepSize = Number(size);
   }
-  addObstacle() {
-    alert("yippie");
-  }
+  previewObstacle(size) {}
+  addObstacle(size) {}
 }
