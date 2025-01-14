@@ -1,4 +1,5 @@
 import { Obstacle } from "./obstacle.js";
+import { Player } from "./player.js";
 export class Settings {
   // Buttons
   settingsBtn = document.getElementById("settings");
@@ -36,8 +37,7 @@ export class Settings {
       this.settingsDialog.close();
     });
     this.addObstacleBtn.addEventListener("click", (e) => {
-      this.previewActive = true;
-      console.log("Enabled preview");
+      Settings.previewActive = true;
       e.preventDefault();
       this.previewObstacle(map, this.obstacleSizeInput.value);
       this.settingsDialog.close();
@@ -61,26 +61,25 @@ export class Settings {
     let x;
     let y;
     map.object.addEventListener("mousemove", (e) => {
-      if (this.previewActive) {
+      if (Settings.previewActive) {
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
     });
-    if (this.previewActive) {
+    if (Settings.previewActive) {
       map.object.addEventListener(
-        "click",
+        "mousedown",
         () => {
-          this.previewActive = false;
-          console.log("Disabled preview");
           map.object.removeChild(preview);
           this.addObstacle(x, y, size);
+          Settings.previewActive = false;
         },
         { once: true }
       );
     }
   }
   addObstacle(x, y, size) {
-    new Obstacle(x, y, size);
+    new Obstacle(x, y, Number(size));
   }
 }
