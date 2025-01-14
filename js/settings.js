@@ -38,7 +38,6 @@ export class Settings {
     });
     this.addObstacleBtn.addEventListener("click", (e) => {
       Settings.previewActive = true;
-      console.log("Enabled preview");
       e.preventDefault();
       this.previewObstacle(map, this.obstacleSizeInput.value);
       this.settingsDialog.close();
@@ -72,7 +71,6 @@ export class Settings {
       map.object.addEventListener(
         "mousedown",
         () => {
-          console.log("Disabled preview");
           map.object.removeChild(preview);
           this.addObstacle(x, y, size);
           Settings.previewActive = false;
