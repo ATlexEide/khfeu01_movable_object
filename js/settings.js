@@ -8,6 +8,8 @@ export class Settings {
   stepSizeInput = document.getElementById("step-size");
   // Dialog
   settingsDialog = document.getElementById("settings-dialog");
+  addObstacleBtn = document.getElementById("add-obstacle-btn");
+  obstacleSizeInput = document.getElementById("add-obstacle-size");
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
@@ -29,6 +31,11 @@ export class Settings {
       this.changePlayerSize(player, this.playerSizeInput.value);
       this.changeStepSize(player, this.stepSizeInput.value);
       map.updateBorder(this);
+      this.settingsDialog.close();
+    });
+    this.addObstacleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("yipp");
       this.settingsDialog.close();
     });
     player.resetPos();
