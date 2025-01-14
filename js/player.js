@@ -110,19 +110,15 @@ export class Player {
       )
         switch (side) {
           case "top":
-            console.log(side);
             this.updatePos(this.position.x, obstacle.y[0] - this.playerSize);
             break;
           case "bottom":
-            console.log(side);
             this.updatePos(this.position.x, obstacle.y[1]);
             break;
           case "right":
-            console.log(side);
             this.updatePos(obstacle.x[1], this.position.y);
             break;
           case "left":
-            console.log(side);
             this.updatePos(obstacle.x[0] - this.playerSize, this.position.y);
             break;
 
