@@ -1,4 +1,6 @@
 :root {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   background-color: rgb(76, 76, 76);
   background-image: url(../assets/images/grass.webp);
   background-size: 6em;
@@ -15,12 +17,24 @@ body {
 }
 header {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  z-index: 1;
+}
+#help,
+#settings {
   position: absolute;
-  right: 0;
   margin: 1em;
   z-index: 1;
 }
+#help {
+  left: 0;
+  font-size: 1.5em;
+  color: white;
+}
+#settings {
+  right: 0;
+}
+
 dialog {
   position: absolute;
   left: 50%;
@@ -91,7 +105,8 @@ dialog form {
   font-size: 2em;
   position: absolute;
   padding: 0.2em;
-  background-color: rgba(255, 255, 255, 0.348);
+  color: white;
+  background-color: rgba(91, 91, 91, 0.348);
   border: 2px solid black;
   white-space: pre-line;
 }
