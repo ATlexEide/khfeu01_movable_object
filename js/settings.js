@@ -21,13 +21,19 @@ export class Settings {
     this.playerSize = playerSize;
   }
   init = (map, player) => {
-    window.addEventListener("wheel", (e) => {
+    window.addEventListener("mousemove", (e) => {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
+    });
+    window.addEventListener("keydown", (e) => {
       switch (e.code) {
         case "KeyP":
           this.settingsDialog.showModal();
           break;
         case "KeyO":
-          // Place obstacle
+          if (this.previewActive) return;
+          this.previewActive = true;
+          this.previewObstacle(map);
           break;
         default:
           break;
@@ -80,20 +86,41 @@ export class Settings {
     this.stepSize = Number(size);
   }
   previewObstacle(map, size = 50) {
+    let x = this.mouseX - size / 2;
+    let y = this.mouseY - size / 2;
     const preview = document.createElement("div");
     preview.id = "obstacle-preview";
     preview.style.width = `${size}px`;
+    preview.style.transform = `translate(${x}px, ${y}px)`;
     map.object.appendChild(preview);
-    let x;
-    let y;
+    const guide = document.createElement("p");
+    guide.id = "guide";
+    guide.textContent = "Use scrollwheel to change size \r\n click to place";
+    map.object.appendChild(guide);
+    guide.style.transform = `translate(${this.mouseX}px, ${this.mouseY}px)`;
     map.object.addEventListener("mousemove", (e) => {
       if (this.previewActive) {
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
         preview.style.transform = `translate(${x}px, ${y}px)`;
+        guide.style.transform = `translate(${this.mouseX}px, ${this.mouseY}px)`;
       }
     });
-    map.object.addEventListener("wheel", (e) => {
+    map.object.addEventListener("wheel", resize);
+    if (this.previewActive) {
+      map.object.addEventListener(
+        "mousedown",
+        () => {
+          map.object.removeChild(preview);
+          map.object.removeChild(guide);
+          this.addObstacle(x, y, size);
+          this.previewActive = false;
+          map.object.removeEventListener("wheel", resize);
+        },
+        { once: true }
+      );
+    }
+    function resize(e) {
       console.log(e.wheelDelta);
       if (e.wheelDelta > 0) {
         size += 10;
@@ -112,17 +139,6 @@ export class Settings {
         preview.style.width = `${size}px`;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
-    });
-    if (this.previewActive) {
-      map.object.addEventListener(
-        "mousedown",
-        () => {
-          map.object.removeChild(preview);
-          this.addObstacle(x, y, size);
-          this.previewActive = false;
-        },
-        { once: true }
-      );
     }
   }
   addObstacle(x, y, size) {

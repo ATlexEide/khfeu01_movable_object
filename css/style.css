@@ -86,3 +86,12 @@ dialog form {
   background-size: cover;
   opacity: 0.7;
 }
+#guide {
+  min-width: fit-content;
+  font-size: 2em;
+  position: absolute;
+  padding: 0.2em;
+  background-color: rgba(255, 255, 255, 0.348);
+  border: 2px solid black;
+  white-space: pre-line;
+}
