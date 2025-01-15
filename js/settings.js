@@ -21,13 +21,18 @@ export class Settings {
     this.playerSize = playerSize;
   }
   init = (map, player) => {
+    window.addEventListener("mousemove", (e) => {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
+    });
     window.addEventListener("keydown", (e) => {
       switch (e.code) {
         case "KeyP":
           this.settingsDialog.showModal();
           break;
         case "KeyO":
-          // Place obstacle
+          this.previewActive = true;
+          this.previewObstacle(map);
           break;
         default:
           break;
@@ -80,12 +85,13 @@ export class Settings {
     this.stepSize = Number(size);
   }
   previewObstacle(map, size = 50) {
+    let x = this.mouseX - size / 2;
+    let y = this.mouseY - size / 2;
     const preview = document.createElement("div");
     preview.id = "obstacle-preview";
     preview.style.width = `${size}px`;
+    preview.style.transform = `translate(${x}px, ${y}px)`;
     map.object.appendChild(preview);
-    let x;
-    let y;
     map.object.addEventListener("mousemove", (e) => {
       if (this.previewActive) {
         x = e.clientX - size / 2;
