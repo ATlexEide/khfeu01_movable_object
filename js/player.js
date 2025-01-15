@@ -18,6 +18,7 @@ export class Player {
     this.object.style.width = `${settings.playerSize}px`;
   }
   updatePos(x, y, side) {
+    if (this.settings.deletingObstacle) return;
     this.position.previous.x = this.position.x;
     this.position.previous.y = this.position.y;
     this.position.x = x;
