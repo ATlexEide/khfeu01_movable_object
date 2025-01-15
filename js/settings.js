@@ -21,7 +21,7 @@ export class Settings {
     this.playerSize = playerSize;
   }
   init = (map, player) => {
-    window.addEventListener("wheel", (e) => {
+    window.addEventListener("keydown", (e) => {
       switch (e.code) {
         case "KeyP":
           this.settingsDialog.showModal();
@@ -93,7 +93,20 @@ export class Settings {
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
     });
-    map.object.addEventListener("wheel", (e) => {
+    map.object.addEventListener("wheel", resize);
+    if (this.previewActive) {
+      map.object.addEventListener(
+        "mousedown",
+        () => {
+          map.object.removeChild(preview);
+          this.addObstacle(x, y, size);
+          this.previewActive = false;
+          map.object.removeEventListener("wheel", resize);
+        },
+        { once: true }
+      );
+    }
+    function resize(e) {
       console.log(e.wheelDelta);
       if (e.wheelDelta > 0) {
         size += 10;
@@ -112,17 +125,6 @@ export class Settings {
         preview.style.width = `${size}px`;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
-    });
-    if (this.previewActive) {
-      map.object.addEventListener(
-        "mousedown",
-        () => {
-          map.object.removeChild(preview);
-          this.addObstacle(x, y, size);
-          this.previewActive = false;
-        },
-        { once: true }
-      );
     }
   }
   addObstacle(x, y, size) {
