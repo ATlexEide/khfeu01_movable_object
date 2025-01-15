@@ -21,6 +21,15 @@ export class Settings {
     this.playerSize = playerSize;
   }
   init = (map, player) => {
+    window.addEventListener("keydown", (e) => {
+      switch (e.code) {
+        case "KeyP":
+          this.settingsDialog.showModal();
+
+        default:
+          break;
+      }
+    });
     // Open settings dialog
     this.settingsBtn.addEventListener("click", () => {
       this.settingsDialog.showModal();
