@@ -101,12 +101,10 @@ dialog form {
   opacity: 0.7;
 }
 #guide {
-  min-width: fit-content;
   font-size: 2em;
   position: absolute;
   padding: 0.2em;
   color: white;
   background-color: rgba(91, 91, 91, 0.348);
   border: 2px solid black;
-  white-space: pre-line;
 }

@@ -93,9 +93,9 @@ export class Settings {
     preview.style.width = `${size}px`;
     preview.style.transform = `translate(${x}px, ${y}px)`;
     map.object.appendChild(preview);
-    const guide = document.createElement("p");
+    const guide = document.createElement("pre");
     guide.id = "guide";
-    guide.textContent = "Use scrollwheel to change size \r\n click to place";
+    guide.textContent = "Use scrollwheel to change size\nClick to place";
     map.object.appendChild(guide);
     guide.style.transform = `translate(${this.mouseX}px, ${this.mouseY}px)`;
     map.object.addEventListener("mousemove", (e) => {
