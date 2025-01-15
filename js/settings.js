@@ -21,11 +21,14 @@ export class Settings {
     this.playerSize = playerSize;
   }
   init = (map, player) => {
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("wheel", (e) => {
       switch (e.code) {
         case "KeyP":
           this.settingsDialog.showModal();
-
+          break;
+        case "KeyO":
+          // Place obstacle
+          break;
         default:
           break;
       }
@@ -87,6 +90,26 @@ export class Settings {
       if (this.previewActive) {
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
+        preview.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    });
+    map.object.addEventListener("wheel", (e) => {
+      console.log(e.wheelDelta);
+      if (e.wheelDelta > 0) {
+        size += 10;
+        x = e.clientX - size / 2;
+        y = e.clientY - size / 2;
+        console.log("+");
+        preview.style.width = `${size}px`;
+        preview.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      if (e.wheelDelta < 0) {
+        size -= 10;
+        if (size < 50) size = 50;
+        x = e.clientX - size / 2;
+        y = e.clientY - size / 2;
+        console.log("-");
+        preview.style.width = `${size}px`;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
     });
