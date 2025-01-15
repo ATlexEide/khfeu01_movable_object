@@ -36,6 +36,7 @@ export class Player {
     );
   }
   move(key) {
+    if (this.settings.settingsDialog.open) return;
     switch (key) {
       case "d":
       case "ArrowRight":
