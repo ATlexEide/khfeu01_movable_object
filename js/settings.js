@@ -126,12 +126,10 @@ export class Settings {
       );
     }
     function resize(e) {
-      console.log(e.wheelDelta);
       if (e.wheelDelta > 0) {
         size += 10;
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
-        console.log("+");
         preview.style.width = `${size}px`;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
@@ -140,7 +138,6 @@ export class Settings {
         if (size < 50) size = 50;
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
-        console.log("-");
         preview.style.width = `${size}px`;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
