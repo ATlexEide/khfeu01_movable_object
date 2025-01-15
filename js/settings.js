@@ -16,6 +16,7 @@ export class Settings {
   // Params/Variables
   defaultUserName = "steve";
   previewActive = false;
+  deletingObstacle = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
@@ -34,6 +35,10 @@ export class Settings {
           if (this.previewActive) return;
           this.previewActive = true;
           this.previewObstacle(map);
+          break;
+        case "Delete":
+          this.deletingObstacle = true;
+          this.deleteObstacle(map);
           break;
         default:
           break;
@@ -141,7 +146,40 @@ export class Settings {
       }
     }
   }
+  deleteObstacle(map) {
+    let currTarget;
+    const obstacles = document.getElementsByClassName("obstacle");
+    for (const obstacle of obstacles) {
+      obstacle.addEventListener("mouseover", (e) => {
+        if (!this.deletingObstacle) return;
+        obstacle.style.border = "solid 4px blue";
+        currTarget = e.target;
+        obstacle.addEventListener("mouseleave", () => {
+          obstacle.style.border = 0;
+        });
+      });
+    }
+    map.object.addEventListener(
+      "click",
+      (e) => {
+        this.deletingObstacle = false;
+        if (e.target === currTarget) map.object.removeChild(currTarget);
+        for (const obstacle of obstacles) {
+          obstacle.removeEventListener("mouseover", () => {});
+          obstacle.removeEventListener("mouseleave", () => {});
+        }
+      },
+      { once: true }
+    );
+  }
   addObstacle(x, y, size) {
     new Obstacle(x, y, Number(size));
   }
 }
+// function makeTarget(e, obstacle) {
+//   obstacle.style.border = "solid 4px blue";
+//   currTarget = e.target;
+// }
+// function removeTarget() {
+//   obstacle.style.border = 0;
+// }
