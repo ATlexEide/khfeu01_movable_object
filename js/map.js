@@ -1,5 +1,4 @@
 import { Obstacle } from "./obstacle.js";
-import { Settings } from "./settings.js";
 export class Map {
   isMouseClicking = false;
   obstacles = Obstacle.usedSpace;

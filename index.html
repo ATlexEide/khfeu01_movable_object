@@ -12,18 +12,23 @@
     <script type="module" src="./js/main.js" defer></script>
   </head>
   <body>
+    <!-- Help and settings -->
     <span id="help">O = Place new obstacle &nbsp;&nbsp; P = Open menu</span>
     <span id="settings"
       ><i class="fa fa-gear" style="font-size: 36px; color: white"></i
     ></span>
-
+    <!-- Map / Playable area -->
     <main id="map">
+      <!-- Player object -->
       <div id="player"></div>
+      <!-- Player origin object | Used for testing/debugging -->
       <div id="origin"></div>
     </main>
+    <!-- Settings menu -->
     <dialog id="settings-dialog">
       <form>
         <legend>Settings</legend>
+        <!-- Options for player and step size -->
         <section id="options">
           <label for="player-size">Player size</label>
           <select class="option" name="player-size" id="player-size">
@@ -38,6 +43,7 @@
             <option value="100">Large</option>
           </select>
         </section>
+        <!-- Option(s) to add obstacle -->
         <section id="add-obstacle">
           <input
             type="number"
@@ -47,6 +53,7 @@
           />
           <button type="button" id="add-obstacle-btn">Add obstacle</button>
         </section>
+        <!-- Option to change player skin with a minecraft username -->
         <section>
           <input
             type="text"
@@ -55,6 +62,7 @@
             placeholder="change skin (username)"
           />
         </section>
+        <!-- Menu close and apply buttons -->
         <section id="form-buttons">
           <button type="button" id="cancel-btn">Cancel</button>
           <button id="apply-btn">Apply</button>
