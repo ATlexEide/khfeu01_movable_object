@@ -13,13 +13,26 @@ export class Settings {
   addObstacleBtn = document.getElementById("add-obstacle-btn");
   obstacleSizeInput = document.getElementById("add-obstacle-size");
   userNameInput = document.getElementById("change-skin");
+  // Params/Variables
   defaultUserName = "steve";
-  static previewActive = false;
+  previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
   }
   init = (map, player) => {
+    window.addEventListener("wheel", (e) => {
+      switch (e.code) {
+        case "KeyP":
+          this.settingsDialog.showModal();
+          break;
+        case "KeyO":
+          // Place obstacle
+          break;
+        default:
+          break;
+      }
+    });
     // Open settings dialog
     this.settingsBtn.addEventListener("click", () => {
       this.settingsDialog.showModal();
@@ -48,7 +61,7 @@ export class Settings {
         alert("Size must be 50 or more");
         return;
       }
-      Settings.previewActive = true;
+      this.previewActive = true;
       this.previewObstacle(
         map,
         this.obstacleSizeInput.value ? this.obstacleSizeInput.value : 50
@@ -74,19 +87,39 @@ export class Settings {
     let x;
     let y;
     map.object.addEventListener("mousemove", (e) => {
-      if (Settings.previewActive) {
+      if (this.previewActive) {
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
     });
-    if (Settings.previewActive) {
+    map.object.addEventListener("wheel", (e) => {
+      console.log(e.wheelDelta);
+      if (e.wheelDelta > 0) {
+        size += 10;
+        x = e.clientX - size / 2;
+        y = e.clientY - size / 2;
+        console.log("+");
+        preview.style.width = `${size}px`;
+        preview.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      if (e.wheelDelta < 0) {
+        size -= 10;
+        if (size < 50) size = 50;
+        x = e.clientX - size / 2;
+        y = e.clientY - size / 2;
+        console.log("-");
+        preview.style.width = `${size}px`;
+        preview.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    });
+    if (this.previewActive) {
       map.object.addEventListener(
         "mousedown",
         () => {
           map.object.removeChild(preview);
           this.addObstacle(x, y, size);
-          Settings.previewActive = false;
+          this.previewActive = false;
         },
         { once: true }
       );

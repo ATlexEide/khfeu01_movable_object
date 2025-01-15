@@ -2,13 +2,13 @@ import { Obstacle } from "./obstacle.js";
 import { Settings } from "./settings.js";
 export class Map {
   isMouseClicking = false;
+  obstacles = Obstacle.usedSpace;
   constructor(settings) {
     this.object = document.getElementById("map");
     this.border = {
       x: document.getElementById("map").offsetWidth - settings.playerSize,
       y: document.getElementById("map").offsetHeight - settings.playerSize,
     };
-    this.obstacles = Obstacle.usedSpace;
   }
   updateBorder(settings) {
     this.border.x = this.object.offsetWidth - settings.playerSize;
@@ -16,7 +16,7 @@ export class Map {
   }
   init = (settings, player) => {
     this.object.addEventListener("mousemove", (e) => {
-      if (Settings.previewActive) return;
+      if (settings.previewActive) return;
       if (this.isMouseClicking) {
         player.object.style.transition = "0s";
         // player.origin.style.transition = "10s";
@@ -28,7 +28,7 @@ export class Map {
       }
     });
     this.object.addEventListener("mousedown", (e) => {
-      if (!Settings.previewActive) {
+      if (!settings.previewActive) {
         player.object.style.transition = "0.3s";
 
         player.updatePos(

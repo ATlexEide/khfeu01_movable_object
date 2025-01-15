@@ -11,6 +11,3 @@ map.init(settings, player);
 // Place an obstacle (x axis, y axis, optional size in px)
 new Obstacle(720, 381, 130);
 new Obstacle(0, 500);
-
-console.log("player size", player.playerSize);
-console.log("player size | settings", settings.playerSize);
