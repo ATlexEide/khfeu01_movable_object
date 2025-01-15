@@ -14,7 +14,7 @@ export class Settings {
   obstacleSizeInput = document.getElementById("add-obstacle-size");
   userNameInput = document.getElementById("change-skin");
   defaultUserName = "steve";
-  static previewActive = false;
+  previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
@@ -48,7 +48,7 @@ export class Settings {
         alert("Size must be 50 or more");
         return;
       }
-      Settings.previewActive = true;
+      this.previewActive = true;
       this.previewObstacle(
         map,
         this.obstacleSizeInput.value ? this.obstacleSizeInput.value : 50
@@ -74,19 +74,19 @@ export class Settings {
     let x;
     let y;
     map.object.addEventListener("mousemove", (e) => {
-      if (Settings.previewActive) {
+      if (this.previewActive) {
         x = e.clientX - size / 2;
         y = e.clientY - size / 2;
         preview.style.transform = `translate(${x}px, ${y}px)`;
       }
     });
-    if (Settings.previewActive) {
+    if (this.previewActive) {
       map.object.addEventListener(
         "mousedown",
         () => {
           map.object.removeChild(preview);
           this.addObstacle(x, y, size);
-          Settings.previewActive = false;
+          this.previewActive = false;
         },
         { once: true }
       );
