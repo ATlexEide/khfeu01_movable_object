@@ -13,6 +13,7 @@ export class Settings {
   addObstacleBtn = document.getElementById("add-obstacle-btn");
   obstacleSizeInput = document.getElementById("add-obstacle-size");
   userNameInput = document.getElementById("change-skin");
+  // Params/Variables
   defaultUserName = "steve";
   previewActive = false;
   constructor(playerSize = 100, stepSize = 50) {
