@@ -181,10 +181,12 @@ export class Settings {
     map.object.addEventListener(
       "click",
       (e) => {
-        Obstacle.count--;
         this.deletingObstacle = false;
         map.object.removeChild(guide);
-        if (e.target === currTarget) map.object.removeChild(currTarget);
+        if (e.target === currTarget) {
+          map.object.removeChild(currTarget);
+          Obstacle.count--;
+        }
         for (const obstacle of obstacles) {
           obstacle.removeEventListener("mouseover", () => {});
           obstacle.removeEventListener("mouseleave", () => {});
