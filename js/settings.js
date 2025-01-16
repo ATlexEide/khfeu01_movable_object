@@ -18,16 +18,21 @@ export class Settings {
   previewActive = false;
   deletingObstacle = false;
   guidePadding = 10;
+  mouseX = undefined;
+  mouseY = undefined;
   constructor(playerSize = 100, stepSize = 50) {
     this.stepSize = stepSize;
     this.playerSize = playerSize;
   }
   init = (map, player) => {
+    this.guide = document.createElement("pre");
+    map.object.appendChild(this.guide);
     window.addEventListener("mousemove", (e) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
     });
     window.addEventListener("keydown", (e) => {
+      console.log(e.code);
       switch (e.code) {
         case "KeyP":
           this.settingsDialog.showModal();
@@ -37,8 +42,9 @@ export class Settings {
           this.previewActive = true;
           this.previewObstacle(map);
           break;
+        case "Backspace":
         case "Delete":
-          if (Obstacle.count < 1) return;
+          if (Obstacle.count < 1 || this.deletingObstacle) return;
           this.deletingObstacle = true;
           this.deleteObstacle(map);
           break;
@@ -150,33 +156,38 @@ export class Settings {
     }
   }
   deleteObstacle(map) {
-    const guide = document.createElement("pre");
-    guide.id = "guide";
-    guide.textContent = "Hover and click to delete";
-    guide.style.transform = `translate(${this.mouseX + this.guidePadding}px, ${
-      this.mouseY + this.guidePadding
-    }px)`;
-    map.object.appendChild(guide);
+    this.guide.id = "guide";
+    this.guide.textContent = "Hover and click to delete";
+    this.guide.style.transform = `translate(${
+      this.mouseX + this.guidePadding
+    }px, ${this.mouseY + this.guidePadding}px)`;
+    map.object.appendChild(this.guide);
     map.object.style.backgroundColor = "rgba(48, 48, 47, 0.81)";
     map.object.style.backgroundBlendMode = "darken";
     player.classList.add("hidden");
-    map.object.addEventListener("mousemove", () => {
-      guide.style.transform = `translate(${
+    const updateGuidePosition = () => {
+      console.log("eee");
+      this.guide.style.transform = `translate(${
         this.mouseX + this.guidePadding
       }px, ${this.mouseY + this.guidePadding}px)`;
-    });
+    };
+    map.object.addEventListener("mousemove", updateGuidePosition);
 
-    let currTarget;
     const obstacles = document.getElementsByClassName("obstacle");
+    let currTarget;
+    const removeBorder = (e) => {
+      e.target.style.border = 0;
+    };
+    const addBorder = (e) => {
+      console.log(e.target);
+      if (!this.deletingObstacle) return;
+      e.target.style.border = "solid 4px blue";
+      currTarget = e.target;
+      e.target.addEventListener("mouseleave", removeBorder);
+    };
+
     for (const obstacle of obstacles) {
-      obstacle.addEventListener("mouseover", (e) => {
-        if (!this.deletingObstacle) return;
-        obstacle.style.border = "solid 4px blue";
-        currTarget = e.target;
-        obstacle.addEventListener("mouseleave", () => {
-          obstacle.style.border = 0;
-        });
-      });
+      obstacle.addEventListener("mouseover", addBorder);
     }
     map.object.addEventListener(
       "click",
@@ -188,9 +199,9 @@ export class Settings {
           Obstacle.count--;
         }
         for (const obstacle of obstacles) {
-          obstacle.removeEventListener("mouseover", () => {});
-          obstacle.removeEventListener("mouseleave", () => {});
-          obstacle.removeEventListener("mousemove", () => {});
+          obstacle.removeEventListener("mouseover", addBorder);
+          obstacle.removeEventListener("mouseleave", removeBorder);
+          map.object.removeEventListener("mousemove", updateGuidePosition);
         }
         player.classList.remove("hidden");
         map.object.style.backgroundColor = null;
